@@ -159,7 +159,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         if (!function_exists('wc_get_chosen_shipping_method_ids')) {
             require_once ABSPATH . PLUGINDIR . '/woocommerce/includes/wc-cart-functions.php';
         }
-        if ( sizeof( array_intersect( wc_get_chosen_shipping_method_ids(), array( 'zasilkovna') ) ) > 0 ) {
+        if ( !is_null( WC()->session ) && sizeof( array_intersect( wc_get_chosen_shipping_method_ids(), array( 'zasilkovna') ) ) > 0 ) {
             $package = WC()->shipping->get_packages()[0];
             $shipping_methods = WC()->shipping->load_shipping_methods( $package );
             $chosen_method_id = wc_get_chosen_shipping_method_instance_ids()[0];
