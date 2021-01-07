@@ -198,6 +198,11 @@ class WC_Zasilkovna_Shipping_Method extends WC_Shipping_Method {
                     $id = intval( $id );
                     $pickup_points[ $id ] = $pickup_point;
                 }
+
+                usort($pickup_points, function ($item1, $item2) {
+                    return $item1->name <=> $item2->name;
+                });
+                
                 set_transient( $transient_name, $pickup_points, WC_ZASILKOVNA_TTL );
             }
             $this->pickup_points = $pickup_points;
